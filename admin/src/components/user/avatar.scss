@@ -1,0 +1,31 @@
+@import "../../styles/variables";
+
+.user-avatar-with-name {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  &__name {
+    color: #6e82a5;
+    font-family: Inter;
+    font-weight: 600;
+  }
+}
+
+.user-avatar {
+
+  &__image {
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    border: solid 2px #6e82a5;
+    padding: $half-gutter;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: $gutter-2;
+  }
+
+  .rmd-avatar {
+    margin-right: $gutter-1;
+  }
+}

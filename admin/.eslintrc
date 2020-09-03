@@ -1,0 +1,40 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "class-methods-use-this": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/display-name": 0,
+    "react/jsx-fragments": [1, "syntax"],
+    "import/namespace": [2, { "allowComputed": true }],
+    "operator-linebreak": ["error", "before", {"overrides": { "&&": "after", "=": "after"}}],
+    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+    "import/prefer-default-export": 0,
+    "camelcase": 0,
+    "no-underscore-dangle": 0
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": [
+    "react-hooks"
+  ],
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./absolute-modules.js"
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}

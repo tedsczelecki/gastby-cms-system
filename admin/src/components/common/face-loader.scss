@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.fade-loader {
+  @include colorOverlay;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+
+  svg {
+    transform: translateY($gutter-2);
+  }
+
+  &--active {
+    opacity: 1;
+    pointer-events: auto;
+
+    svg {
+      transform: none;
+    }
+  }
+}

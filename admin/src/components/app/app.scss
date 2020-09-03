@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+// Styles specific to the component in index.js should go here
+.app {
+  display: grid;
+  grid-template-columns: 350px minmax(100px, 1fr);
+
+  &__main-content {
+    padding: $gutter-3;
+  }
+
+  &__page {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}

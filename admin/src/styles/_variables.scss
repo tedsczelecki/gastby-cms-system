@@ -1,0 +1,61 @@
+@import '~@react-md/theme/dist/color-palette';
+
+// Colors
+$brand-primary: #101924 !default;
+$brand-primary-opposite: #fff !default;
+$brandy-primary-lighter: #6e82a5 !default;
+$brand-secondary: $rmd-light-blue-900 !default;
+$brand-secondary-opposite: #fff !default;
+$content-background-color: #f5f6fa;
+$md-primary-color: $brand-primary;
+$md-secondary-color: $brand-secondary;
+$background-color: #eee;
+$paper-background-color: #fff;
+$sidebar-color: $brandy-primary-lighter;
+$sidebar-color-active: #fff;
+
+
+// Global
+$transition-prop: all !default;
+$transition-duration: 0.3s !default;
+$transition-ease: ease-out !default;
+
+// Layout
+$header-height: 80px !default;
+$gutter: 30px !default;
+$sidebar-width: 300px !default;
+$content-gutter: $gutter !default;
+$sidebar-width: 230px !default;
+$sidebar-collapsed-width: 55px !default;
+
+// z-indexes
+$header-z-index: 4;
+$sidebar-z-index: 3;
+$content-overlay-z-index: 2;
+$content-z-index: 1;
+$modal-z-index: 99;
+
+// layout
+$half-gutter: 4px;
+$base-gutter: $half-gutter * 2;
+
+$gutter-1: $base-gutter;
+$gutter-2: $base-gutter * 2;
+$gutter-3: $base-gutter * 3;
+$gutter-4: $base-gutter * 4;
+$gutter-5: $base-gutter * 5;
+$gutter-6: $base-gutter * 6;
+$gutter-7: $base-gutter * 7;
+$gutter-8: $base-gutter * 8;
+$gutter-9: $base-gutter * 9;
+$gutter-10: $base-gutter * 10;
+$gutter-11: $base-gutter * 11;
+$gutter-12: $base-gutter * 12;
+$gutter-13: $base-gutter * 13;
+$gutter-14: $base-gutter * 14;
+$gutter-15: $base-gutter * 15;
+$gutter-16: $base-gutter * 16;
+$gutter-17: $base-gutter * 17;
+$gutter-18: $base-gutter * 18;
+$gutter-19: $base-gutter * 19;
+$gutter-20: $base-gutter * 20;

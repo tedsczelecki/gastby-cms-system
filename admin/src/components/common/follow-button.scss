@@ -1,0 +1,42 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.follow-button {
+  //width: 144px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  border: none;
+  background-color: transparent;
+
+  &.rmd-button {
+    padding-left: 52px;
+  }
+
+  &--following {
+
+  }
+
+  &__heart {
+    width: 100px;
+    height: 100px;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    transition: background-position 1s steps(28);
+    transition-duration: 0s;
+    position: absolute;
+    top: 50%;
+    left: $gutter-4;
+    transform-origin: center;
+    transform: scale(0.8) translate(-50%, -50%);
+    margin-left: -15px;
+    margin-top: -10px;
+    pointer-events: none;
+
+    &--active {
+      transition-duration: 1s;
+      background-position: -2800px 0;
+    }
+  }
+}

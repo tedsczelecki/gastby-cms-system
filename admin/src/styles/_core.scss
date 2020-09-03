@@ -1,0 +1,54 @@
+@import '~@react-md/theme/dist/color-palette';
+@import "../styles/mixins";
+
+//$rmd-theme-light: false;
+$rmd-theme-primary: #101924;
+$rmd-theme-secondary: $rmd-pink-a-200;
+// other variable overrides
+
+@import '~react-md/dist/react-md';
+@include react-md-utils;
+
+@import "typeography";
+@import './variables';
+
+.rmd-button--primary {
+  color: #fff !important;
+}
+
+.rmd-table {
+  width: 100%;
+}
+
+.rmd-floating-label {
+  pointer-events: none;
+  &:not(.rmd-floating-label--active) {
+    color: #aaa;
+  }
+}
+
+.rmd-table-cell--header {
+  font-weight: 700
+}
+
+.amped-form {
+
+  &__grid {
+    margin-bottom: $gutter-2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: $gutter-2;
+
+    @include break-on('small') {
+        grid-template-columns: minmax(100px, 1fr);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  > div:nth-last-child(2) {
+    margin-bottom: 0 !important;
+  }
+}

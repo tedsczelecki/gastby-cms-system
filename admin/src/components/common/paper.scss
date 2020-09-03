@@ -1,0 +1,12 @@
+@import '../../styles/mixins';
+
+.paper {
+
+  &__title {
+    @include paperTitle;
+  }
+
+  &__paper {
+    @include paper;
+  }
+}

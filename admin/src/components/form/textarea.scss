@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.rp-textarea {
+  &__label {
+    @include formLabel;
+  }
+
+  .rdw-editor-toolbar {
+    border-color: #E0E0E0
+  }
+
+  .rdw-editor-main {
+    border: solid 1px #E0E0E0;
+    margin: 0;
+    padding: 0 $gutter-2;
+    min-height: 250px;
+  }
+
+  .rdw-option-wrapper {
+    @include transition(background-color);
+    border: none !important;
+    box-shadow: none;
+    height: 25px;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}

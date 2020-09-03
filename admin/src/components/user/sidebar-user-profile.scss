@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+
+.sidebar-user-profile {
+  width:100%;
+  display: flex;
+
+  &__menu {
+    margin-left: auto;
+
+    svg path {
+      fill: $sidebar-color;
+    }
+  }
+}

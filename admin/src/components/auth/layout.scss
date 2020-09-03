@@ -1,0 +1,49 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.auth-layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+
+  &__background {
+    flex: 1;
+    height: 100vh;
+    background:
+      linear-gradient(
+        to right,
+        $brand-primary 0%,
+        $brand-primary 25%,
+        lighten($brand-primary, 2%) 25%,
+        lighten($brand-primary, 2%) 50%,
+        lighten($brand-primary, 4%) 50%,
+        lighten($brand-primary, 4%) 75%,
+        lighten($brand-primary, 6%) 75%,
+        lighten($brand-primary, 6%) 100%,
+      );
+
+    @include break-on('medium') {
+      display: none;
+    }
+  }
+
+  &__form {
+    width: 60vw;
+    background-color: $content-background-color;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: $gutter-5 $gutter-12 $gutter-5 $gutter-5;
+
+    @include break-on('medium') {
+      width: 100vw;
+      padding: $gutter-2;
+      justify-content: center;
+    }
+
+    &__inner {
+      width: 400px;
+    }
+  }
+}

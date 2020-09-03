@@ -1,0 +1,112 @@
+// sass-lint:disable no-vendor-prefixes
+@import './variables';
+
+@import 'variables';
+
+$breakpoints: (
+        'small':  768px,
+        'medium': 960px,
+        'large':  1200px,
+        'x-large': 1600px
+) !default;
+
+/**
+  Will print a media query based on what is passed as breakpoint.
+  $breakpoint
+    'x-large'
+    'large'
+    'medium'
+    'small'
+    Any size specific measurement (240px, 20em, etc)
+
+   $use-min-width
+    (true) use min-width as the media query
+    (false) use max-width as the media query
+
+   Usage
+
+   @include break-on('medium') {
+    ...styles
+   }
+ */
+
+@mixin break-on($breakpoint, $use-min-width: false) {
+
+  $_breakpoint: if(map-has-key($breakpoints, $breakpoint), map-get($breakpoints, $breakpoint), $breakpoint);
+  @if $use-min-width {
+    @media all and (min-width: $_breakpoint + 1px) {
+      @content;
+    }
+  } @else {
+    @media all and (max-width: $_breakpoint) {
+      @content;
+    }
+  }
+
+}
+
+
+@mixin cta(
+  $color              : $brand-primary-opposite,
+  $background         : $brand-primary,
+  $hover-color        : $brand-primary-opposite,
+  $hover-background   : darken($brand-primary, 10%),
+  $border-color       : $brand-primary,
+  $hover-border-color : $brand-primary
+) {
+  @include transition;
+  color: $color;
+  background: $background;
+  outline: none;
+  font-size: 1rem;
+  padding-left: $gutter/2;
+  padding-right: $gutter/2;
+  cursor: pointer;
+  border: solid 1px $border-color;
+
+  &:hover {
+    color: $hover-color;
+    background: $hover-background;
+  }
+}
+
+@mixin formLabel {
+  margin-bottom: $gutter-1;
+  color: #aaa;
+}
+
+@mixin paper {
+  background-color: $paper-background-color;
+  padding: $gutter;
+}
+
+@mixin paperTitle {
+  font-size: 1.3rem;
+  margin-bottom: $gutter/2;
+  color: #999;
+  line-height: 1;
+}
+
+@mixin placeholder($color) {
+  &::-webkit-input-placeholder {
+    color: $color; /* Chrome/Opera/Safari */
+  }
+  &::-moz-placeholder {
+    color: $color; /* Firefox 19+ */
+  }
+  &:-ms-input-placeholder {
+    color: $color; /* IE 10+ */
+  }
+  &:-moz-placeholder {
+    color: $color; /* Firefox 18- */
+  }
+}
+
+@mixin transition(
+  $prop : $transition-prop,
+  $duration : $transition-duration,
+  $ease : $transition-ease
+) {
+  transition: $prop $duration $ease;
+  backface-visibility: hidden;
+}

@@ -1,0 +1,184 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.login {
+  width: 100%;
+
+  * {
+    font-family: 'Inter';
+  }
+
+  &__actions {
+    margin-top: $gutter-2;
+    margin-bottom: $gutter-3;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  &__auth-urls {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__error {
+    margin-bottom: $gutter-2;
+    color: #cc0000;
+  }
+
+  &__field {
+    margin-bottom: $gutter-2;
+  }
+
+  &__form {
+
+    &__content {
+      p {
+        font-size: 14px;
+        line-height: 23px;
+      }
+    }
+    &__logo {
+      width: 50%;
+      margin-bottom: $gutter-3;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &__or {
+    width: 200px;
+    position: relative;
+    margin: 0 auto;
+    height: 20px;
+    margin-bottom: $gutter-2;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background-color: #ddd;
+    }
+
+    div {
+      background-color: $content-background-color;
+      color: #ccc;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0 $gutter-1;
+      font-size: 14px;
+    }
+  }
+
+  &__register {
+    margin-bottom: $gutter-3;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+
+    a {
+      color: #1190CB;
+      padding-right: $gutter-1;
+      margin-right: $gutter-1;
+      display: block;
+      position: relative;
+      text-decoration: none;
+
+      &:last-child {
+        padding-right: 0;
+        margin-right: 0;
+
+        &:before {
+          display: none;
+        }
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 50%;
+        width: 1px;
+        background-color: $brand-primary;
+        top: 25%;
+        right: 0;
+      }
+    }
+  }
+
+  .md-card-title {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  }
+  .md-card-text {
+    padding: 0 !important;
+  }
+
+  .rmd-text-field {
+    background-color: #fff;
+  }
+}
+
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669F2;
+
+.google-btn {
+  width: 200px;
+  height: 42px;
+  background-color: $google-blue;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  display: block;
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: $white;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: $white;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    transform: translateY(1px);
+  }
+  &:hover {
+    box-shadow: 0 0 6px $google-blue;
+  }
+  &:active {
+    background: $button-active-blue;
+  }
+}
+

@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+
+.page-actions {
+  padding-bottom: $gutter-2;
+
+  &__actions {
+    margin-left: auto;
+  }
+
+  &__image {
+    height: 50px;
+    width: 50px;
+    margin-right: $gutter-2;
+
+    .user-avatar__image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  &__sub-title {
+    font-size: 14px;
+    line-height: 23px;
+    color: lighten(#333, 10%);
+  }
+
+  &__title {
+    font-size: 28px;
+    line-height: 30px;
+    margin-bottom: 0;
+  }
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--stick-on-scroll {
+    position: sticky;
+    top: 0;
+    background-color: #FAFAFA;
+    z-index: 1;
+  }
+}
