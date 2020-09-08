@@ -49,7 +49,7 @@ DialogButton.propTypes = {
   confirmButtonLabel: PropTypes.string,
   content: PropTypes.string,
   title: PropTypes.string,
-  theme: PropTypes.oneOf('primary', 'error'),
+  theme: PropTypes.oneOf(['primary', 'error']),
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func,
 }

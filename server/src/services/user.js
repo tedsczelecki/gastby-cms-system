@@ -104,14 +104,17 @@ export const userAvatarInclude = ({ models }) => ({
   model: models.File,
   as: 'avatar',
   foreignKey: 'avatarFileId',
+  required: false,
 })
 
 export const userFileIncludes = ({ models }) => [
   userAvatarInclude({ models }),
+];
+
+export const userActiveSiteIncludes = ({ models }) => [
   {
-    model: models.File,
-    as: 'wallpaper',
-    foreignKey: 'wallpaperFileId',
+    as: 'activeSite',
+    model: models.Site,
   }
 ];
 

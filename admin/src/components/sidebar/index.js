@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { isActive, linkMatchesPath } from 'libs/nav';
 import { SidebarUserProfile } from 'components/user';
+import { PublishButton, SiteSelector } from 'components/sites';
 import logo from 'images/logo-white.svg';
 
 import './sidebar.scss';
@@ -78,6 +79,10 @@ const Sidebar = ({
       <nav className="sidebar__nav">
         <SideBarList currentPath={pathname} links={navigation} />
       </nav>
+      <div className="sidebar__user-site-selector">
+        <SiteSelector />
+        <PublishButton />
+      </div>
       <div className="sidebar__user-info">
         <SidebarUserProfile />
       </div>

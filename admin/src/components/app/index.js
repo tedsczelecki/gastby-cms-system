@@ -25,7 +25,7 @@ const App = () => {
     if (!isAuthed && unAuthedPaths.indexOf(location.pathname) === -1) {
       history.push('/login');
     }
-  }, []);
+  }, [history, isAuthed, location]);
 
   if (!isAuthed) {
     return <AuthRouter />;

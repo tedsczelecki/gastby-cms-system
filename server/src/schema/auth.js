@@ -7,9 +7,10 @@ export default gql`
     
     extend type Mutation {
         forgotPassword(email: String!): SuccessResponse
-        register(name: String!, email: String!, password: String!): Token
+        register(input: RegisterInput!): Token
         registerGoogle(code: String!): Token
         resetPassword(password: String!, confirmPassword: String!, token: String): SuccessResponse
+        signIn(email: String!, password: String!): Token!
     }
 
     type AuthUrls {
@@ -19,6 +20,12 @@ export default gql`
   type SuccessResponse {
       success: Boolean
       message: String
+  }
+  
+  input RegisterInput {
+      email: String!
+      name: String!
+      password: String!
   }
     
 `;

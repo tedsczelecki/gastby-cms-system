@@ -5,8 +5,8 @@ import {
   TextField,
 } from "@react-md/form";
 
-import { REGISTER_USER } from '../../queries/auth';
-import { setUserToken } from '../../services/storage';
+import { REGISTER_USER } from 'queries/auth';
+import { setUserToken } from 'services/storage';
 import { useMutation } from "@apollo/client";
 import { cleanErrorMessage } from 'libs/errors';
 
@@ -14,7 +14,7 @@ import logo from 'images/logo.svg';
 import './login.scss';
 
 const AuthLogin = () => {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [register, { data: token, error: errorMessage, loading }] = useMutation(REGISTER_USER);
@@ -30,15 +30,14 @@ const AuthLogin = () => {
       await register({
         variables: {
           input: {
-            username,
-            name: username,
             email,
-            password
+            name,
+            password,
           }
         }
       })
     } catch(e) {
-
+      console.log('register error', e);
     }
   };
 
@@ -64,16 +63,16 @@ const AuthLogin = () => {
       <form autoComplete={false} className="login__fields">
         <div className="login__field">
           <TextField
-            autocomplete="off"
-            label="Username"
-            value={username}
-            onChange={(evt) => setUsername(evt.target.value) }
+            autoComplete="random-email"
+            label="Name"
+            value={name}
+            onChange={(evt) => setName(evt.target.value) }
             onKeyDown={handleKeyDown}
           />
         </div>
         <div className="login__field">
           <TextField
-            autocomplete="random-email"
+            autoComplete="random-email"
             label="Email"
             value={email}
             onChange={(evt) => setEmail(evt.target.value) }
@@ -82,7 +81,7 @@ const AuthLogin = () => {
         </div>
         <div className="login__field">
           <TextField
-            autocomplete="random-password"
+            autoComplete="random-password"
             label="password"
             type="password"
             value={password}

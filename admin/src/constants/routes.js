@@ -1,7 +1,9 @@
 import React from 'react';
 import Home from 'pages/info';
-import Venues from 'pages/venues';
-import Venue from 'pages/venue';
+import Pages from 'pages/pages';
+import Page from 'pages/page';
+import Site from 'pages/site';
+import Sites from 'pages/sites';
 import { UserProfilePage } from 'pages/user';
 import { TextIconSpacing } from "@react-md/icon";
 import { AddSVGIcon } from '@react-md/material-icons';
@@ -10,8 +12,8 @@ import { useHistory } from 'react-router-dom';
 
 const venuesProps = {
   pageActions: {
-    title: 'Venues',
-    subTitle: 'All of your created venues are below',
+    title: 'Pages',
+    subTitle: 'All of your created pages are below',
     Actions: () => {
       const history = useHistory();
 
@@ -19,10 +21,10 @@ const venuesProps = {
         <Button
           theme="primary"
           themeType="contained"
-          onClick={() => history.push('/venue') }
+          onClick={() => history.push('/page') }
         >
           <TextIconSpacing icon={<AddSVGIcon />} iconAfter>
-            Create new
+            New page
           </TextIconSpacing>
         </Button>
       )
@@ -33,21 +35,33 @@ const venuesProps = {
 export default [
   {
     path: '/',
-    Component: Venues,
+    Component: Pages,
     props: venuesProps
   },
   {
-    path: '/venues',
-    Component: Venues,
+    path: '/pages',
+    Component: Pages,
     props: venuesProps
   },
   {
-    path: '/venue/:id',
-    Component: Venue,
+    path: '/page',
+    Component: Page,
   },
   {
-    path: '/venue',
-    Component: Venue,
+    path: '/page/:id',
+    Component: Page,
+  },
+  {
+    path: '/sites',
+    Component: Sites,
+  },
+  {
+    path: '/site',
+    Component: Site,
+  },
+  {
+    path: '/site/:id',
+    Component: Site,
   },
   {
     path: '/user/profile',

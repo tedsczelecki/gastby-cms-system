@@ -20,8 +20,12 @@ const models = {
   File: sequelize.import('./file'),
   Notification: sequelize.import('./notification'),
   PasswordToken: sequelize.import('./passwordToken'),
+  Page: sequelize.import('./page'),
+  PageData: sequelize.import('./pageData'),
+  PageMeta: sequelize.import('./pageMeta'),
+  Site: sequelize.import('./site'),
+  SiteUser: sequelize.import('./siteUser'),
   User: sequelize.import('./user'),
-  Venue: sequelize.import('./venue'),
 };
 
 Object.keys(models).forEach(key => {

@@ -1,6 +1,5 @@
-// import ApolloClient from 'apollo-boost';
 import { ApolloClient, ApolloProvider, ApolloLink, InMemoryCache, split } from '@apollo/client';
-import { WebSocketLink } from 'apollo-link-ws';
+// import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { onError } from "apollo-link-error";
 import React from 'react';
@@ -21,7 +20,9 @@ import './index.scss';
 
 const token = getUserToken();
 
-const { REACT_APP_API_PATH, REACT_APP_WS_PATH } = process.env;
+const { REACT_APP_API_PATH } = process.env;
+
+console.log(REACT_APP_API_PATH);
 
 const httpLink = createUploadLink({
   uri: `${REACT_APP_API_PATH}/graphql`,
@@ -57,12 +58,12 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     });
 });
 
-const wsLink = new WebSocketLink({
-  uri: `${REACT_APP_WS_PATH}/graphql`,
-  options: {
-    reconnect: true,
-  },
-});
+// const wsLink = new WebSocketLink({
+//   uri: `${REACT_APP_WS_PATH}/graphql`,
+//   options: {
+//     reconnect: true,
+//   },
+// });
 
 const splitLink = split(
   // split based on operation type
@@ -73,14 +74,14 @@ const splitLink = split(
       definition.operation === 'subscription'
     );
   },
-  wsLink,
+  // wsLink,
   httpLink,
 );
 
 const target = document.querySelector('#root');
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: ApolloLink.from([errorLink, splitLink]),
+  link: ApolloLink.from([errorLink, httpLink]),
   defaultOptions,
 });
 

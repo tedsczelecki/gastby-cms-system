@@ -30,7 +30,7 @@ const FormFileComponent = ({
       if (data && data.uploadFile && data.uploadFile) {
         onChange(data.uploadFile);
       }
-    }, [data])
+    }, [data, onChange])
 
   const fileData = value || (data && data.uploadFile);
   const containerClasses = classNames('form-file__container', {

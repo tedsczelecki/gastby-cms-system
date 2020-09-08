@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.rp-code {
+  &__label {
+    @include formLabel;
+  }
+
+  &__textarea {
+    width: 100%;
+    resize: vertical;
+    border: solid 1px #E0E0E0;
+    min-height: 200px;
+  }
+}

@@ -1,7 +1,9 @@
+import {AuthenticationError} from "apollo-server";
+
 const { UserInputError } = require('apollo-server');
 import { v5 as uuidv5 } from 'uuid';
 import { sendWelcomeEmail, sendForgotPassword } from '../services/email';
-import { generatePassword } from '../services/user';
+import {generatePassword, registerDevice} from '../services/user';
 import { getGoogleAuthUrl } from '../libs/auth/google';
 
 import { getUserInfo } from '../libs/auth/google';
@@ -46,7 +48,13 @@ export default {
       };
 
     },
-    register: async (parent, { name, email, password }, { models, secret }) => {
+    register: async (parent, { input }, { models, secret }) => {
+      const {
+        name,
+        email,
+        password
+      } = input;
+
       const userExists = await models.User.findOne({
         where: {
           email
@@ -62,7 +70,6 @@ export default {
         email,
         password,
         strategy: 'email',
-        username: email,
       });
 
       try {
@@ -161,6 +168,33 @@ export default {
         message: 'Your password has been updated successfully',
       }
 
-    }
+    },
+    signIn: async (
+      parent,
+      { name, email, password },
+      { models, device, secret },
+    ) => {
+      const user = await models.User.findByEmail(email);
+
+      if (!user) {
+        throw new UserInputError(
+          'No user found with this login credentials.',
+        );
+      }
+
+      const isValid = await user.validatePassword(password);
+
+      if (!isValid) {
+        throw new AuthenticationError('Invalid password.');
+      }
+
+      const registeredDevice = await registerDevice({
+        device,
+        models,
+        user,
+      });
+
+      return { token: createToken({ ...user.get({ plain: true }), deviceId: registeredDevice.id }, secret, '1y') };
+    },
   }
 }

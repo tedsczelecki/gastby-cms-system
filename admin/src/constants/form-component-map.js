@@ -4,8 +4,12 @@ import {
 } from '@react-md/form';
 import FormFile from 'components/form/file';
 import Textarea from 'components/form/textarea';
+import Code from 'components/form/code';
 
 export default {
+  code: {
+    component: Code,
+  },
   file: {
     component: FormFile,
   },

@@ -1,7 +1,12 @@
 @import '../../styles/variables';
 
 .page-actions {
-  padding-bottom: $gutter-2;
+  padding: $gutter-3;
+  width: calc(100% + #{$gutter-6});
+  margin-left: -$gutter-3;
+  margin-top: -$gutter-3;
+  position: relative;
+  z-index: 4 !important;
 
   &__actions {
     margin-left: auto;

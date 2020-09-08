@@ -7,14 +7,6 @@ const user = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    username: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
     email: {
       type: DataTypes.STRING,
       unique: true,
@@ -35,6 +27,9 @@ const user = (sequelize, DataTypes) => {
     role: {
       type: DataTypes.STRING,
       defaultValue: 'user',
+    },
+    activeSiteId: {
+      type: DataTypes.INTEGER,
     },
     name: {
       type: DataTypes.STRING,
@@ -74,12 +69,21 @@ const user = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasOne(models.File, {
       as: 'avatar',
-      foreignKey: 'avatarFileId',
+      foreignKey: 'userId',
     });
-    User.hasOne(models.File, {
-      as: 'wallpaper',
-      foreignKey: 'wallpaperFileId',
+
+    User.belongsTo(models.Site, {
+      as: 'activeSite',
+      foreignKey: 'activeSiteId',
+      targetKey: 'id',
     });
+
+    User.belongsToMany(models.Site, {
+      through: 'siteUsers',
+      as: 'sites',
+      foreignKey: 'userId',
+      otherKey: 'siteId'
+    })
   };
 
   User.findByEmail = async email => {

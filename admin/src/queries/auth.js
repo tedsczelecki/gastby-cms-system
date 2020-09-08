@@ -3,6 +3,11 @@ import gql from 'graphql-tag';
 export const ME = gql`
     query {
       me {
+        activeSite {
+            id
+            name
+            previewUrl
+        }
         email
         name
         role
@@ -52,8 +57,8 @@ export const LOGIN = gql`
 `;
 
 export const REGISTER_USER = gql`
-    mutation Register($name: String!, $email: String!, $password: String!) {
-        register(name: $name, email: $email, password: $password) {
+    mutation Register($input: RegisterInput!) {
+        register(input: $input) {
             token
         }
     }

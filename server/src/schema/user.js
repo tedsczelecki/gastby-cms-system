@@ -12,14 +12,14 @@ export default gql`
   extend type Mutation {
     deleteUser(id: ID!): Boolean!
     registerDeviceNotification(authData: String!): SimpleResponse
-    signIn(email: String!, password: String!): Token!
-    signUp( username: String!, email: String!,password: String!): Token!
+    setMyActiveSite(siteId: Int!) : SimpleResponse
     updateMe(input: UserInput!): PersonalUser!
   }
 
   type PersonalUser {
       id: ID!
       about: String
+      activeSite: Site
       avatar: File
       username: String
       name: String
@@ -41,6 +41,7 @@ export default gql`
   type User {
     id: Int!
     about: String
+    activeSite: Site
     avatar: File
     isFollowing: Boolean
     username: String
@@ -81,7 +82,7 @@ export default gql`
     email: String
     role: String
     location: String
-      wallpaper: FileInput
+    wallpaper: FileInput
     website: String
   }
 

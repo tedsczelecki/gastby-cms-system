@@ -8,14 +8,6 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      username: {
-        type: Sequelize.DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
       email: {
         type: Sequelize.DataTypes.STRING,
         unique: true,
@@ -36,6 +28,9 @@ module.exports = {
       role: {
         type: Sequelize.STRING,
         defaultValue: 'user',
+      },
+      activeSiteId: {
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.DataTypes.STRING,

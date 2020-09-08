@@ -4,9 +4,9 @@ import authSchema from './auth';
 import fileSchema from './file';
 import messageSchema from './message';
 import notificationSchema from './notification';
+import pageSchema from './page';
+import siteSchema from './site';
 import userSchema from './user';
-import venueSchema from './venue';
-import zoneSchema from './zone';
 
 const linkSchema = gql`
   scalar Date
@@ -35,7 +35,7 @@ export default [
   linkSchema,
   messageSchema,
   notificationSchema,
+  pageSchema,
+  siteSchema,
   userSchema,
-  venueSchema,
-  zoneSchema
 ];

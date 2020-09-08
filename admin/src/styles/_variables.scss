@@ -21,12 +21,17 @@ $transition-duration: 0.3s !default;
 $transition-ease: ease-out !default;
 
 // Layout
-$header-height: 80px !default;
+$app-max-width: 600px;
+$topbar-height: 56px !default;
 $gutter: 30px !default;
 $sidebar-width: 300px !default;
 $content-gutter: $gutter !default;
 $sidebar-width: 230px !default;
 $sidebar-collapsed-width: 55px !default;
+$action-bar-height: 59px;
+$border-radius: 4px;
+$border: solid 1px #ddd;
+$header-height: 60px;
 
 // z-indexes
 $header-z-index: 4;

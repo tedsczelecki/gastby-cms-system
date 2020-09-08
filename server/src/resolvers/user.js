@@ -6,11 +6,13 @@ import {
   isFollowingUser,
   registerDevice,
   updateUser,
+  userActiveSiteIncludes,
   userDeviceIncludes,
   userFileIncludes,
   userIncludes,
 } from '../services/user';
 import { isAdmin, isAuthenticated } from './authorization';
+import {hasAccessToSite} from "../services/site";
 
 export const createToken = async (user, secret, expiresIn) => {
   const { id, email, username, role, deviceId = null } = user;
@@ -72,7 +74,7 @@ export default {
       const user = await models.User.findOne({
         include: [
           ...userFileIncludes({models}),
-          ...userDeviceIncludes({models, device, userId: me.id}),
+          ...userActiveSiteIncludes({models}),
         ],
         where: {
           id: me.id
@@ -117,70 +119,33 @@ export default {
         }
       },
     ),
-    signUp: async (
-      parent,
-      { username, email, password },
-      { models, device, secret },
-    ) => {
 
-      const userExists = await models.User.findOne({
-        where: {
-          [Op.or]: {
-            email,
-            username,
+    setMyActiveSite: combineResolvers(
+      isAuthenticated,
+      async (parent, { siteId }, { models, me }) => {
+        await hasAccessToSite({
+          models,
+          siteId,
+          userId: me.id
+        });
+
+        const user = await models.User.findOne({
+          where: {
+            id: me.id
           }
+        });
+
+        console.log(user);
+
+        await user.update({
+          activeSiteId: siteId,
+        });
+
+        return {
+          success: true,
         }
-      });
-
-      if (userExists) {
-        const doesEmailMatch = userExists.email === email;
-        throw new UserInputError(`${doesEmailMatch ? 'Email': 'Username'} already exists`)
       }
-
-      const user = await models.User.create({
-        username,
-        email,
-        password,
-      });
-
-      const registeredDevice = await registerDevice({
-        device,
-        models,
-        user,
-      });
-
-      return { token: createToken({ ...user.get({ plain: true }), deviceId: registeredDevice.id }, secret, '1y') };
-    },
-
-    // @TODO move to auth resolver
-    signIn: async (
-      parent,
-      { email, password },
-      { models, device, secret },
-    ) => {
-      const user = await models.User.findByEmail(email);
-
-      if (!user) {
-        throw new UserInputError(
-          'No user found with this login credentials.',
-        );
-      }
-
-      const isValid = await user.validatePassword(password);
-
-      if (!isValid) {
-        throw new AuthenticationError('Invalid password.');
-      }
-
-      const registeredDevice = await registerDevice({
-        device,
-        models,
-        user,
-      });
-
-      return { token: createToken({ ...user.get({ plain: true }), deviceId: registeredDevice.id }, secret, '1y') };
-    },
-
+    ),
     updateMe: combineResolvers(
       isAuthenticated,
       async (parent, { input }, { models, me }) => {

@@ -7,7 +7,7 @@ import { Button } from 'react-md';
 import {Loader, PageActions, Paper} from 'components/common';
 import { toastSuccess } from 'libs/toasts';
 import { cleanApiInput } from 'libs/api';
-import {useMutation, useQuery} from '@apollo/react-hooks';
+import {useMutation, useQuery} from '@apollo/client';
 
 const getQueryData = (data) => {
   if (!data) {
@@ -19,12 +19,15 @@ const getQueryData = (data) => {
 
 const AmpedGraphForm = ({
   apolloProps = {},
+  basePath = '/page',
   dataQuery = null,
   dataQueryVariables = {},
   displayButton = false,
   displayToast = true,
   isCreating = false,
   itemName = '',
+  subtitleCreating = 'You are creating a page',
+  subtitleUpdating = 'You are editing this page',
   updateQuery = null,
   updateQueryVariables = {},
   onComplete = () => {},
@@ -46,7 +49,7 @@ const AmpedGraphForm = ({
 
   if (isCreating && responseData) {
     const id = getQueryData(responseData).id;
-    history.replace(`/venue/${id}`)
+    history.replace(`${basePath}/${id}`)
   }
 
   const handleSubmit = async () => {
@@ -70,15 +73,13 @@ const AmpedGraphForm = ({
       [name]: value
     }
 
-    console.log('NEW VALUES', newValues);
-
     setFormValues(newValues);
   }
 
   const isExisting = values;
   const data = formValues || getQueryData(values)
-  const title = isExisting ? data && data.name : 'Create new venue';
-  const subTitle = isExisting ? 'You are editing this venue' : 'Add a new venue to your account'
+  const title = isExisting ? data && data.name : `Create new ${itemName.toLowerCase()}`;
+  const subTitle = isExisting ? subtitleUpdating : subtitleCreating
   const saveButtonLabel = isExisting ? 'Save' : 'Create';
 
   return (

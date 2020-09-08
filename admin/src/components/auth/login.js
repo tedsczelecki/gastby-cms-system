@@ -16,8 +16,8 @@ import './login.scss';
 const AuthLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { loading, data: authUrls } = useQuery(AUTH_URLS);
-  const { doMutation: login } = useMutationHandled({ query: LOGIN });
+  const { data: authUrls } = useQuery(AUTH_URLS);
+  const { doMutation: login, loading } = useMutationHandled({ query: LOGIN });
 
   const doLogin = async () => {
     try {
@@ -32,7 +32,7 @@ const AuthLogin = () => {
       setUserToken(data.signIn.token);
       window.location.href = '/';
     } catch(e) {
-
+      console.log('Login error', e);
     }
   };
 

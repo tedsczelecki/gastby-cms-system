@@ -1,0 +1,30 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.page-create {
+
+  &__actions {
+    > button {
+      margin-left: $gutter-2;
+    }
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) 300px;
+    grid-gap: $gutter-3;
+
+    @include break-on('small') {
+        grid-template-columns: minmax(100px, 1fr);
+    }
+  }
+
+  &__main, &__sidebar {
+    > div {
+      margin-bottom: $gutter-4;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

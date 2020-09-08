@@ -14,6 +14,7 @@ import schema from './schema';
 import resolvers from './resolvers';
 import models, { sequelize } from './models';
 import loaders from './loaders';
+import { userActiveSiteIncludes } from './services/user';
 
 const app = express();
 
@@ -27,25 +28,29 @@ app.get('/health', (req, res) => {
 })
 
 const getMe = async req => {
-  const token = req.headers.authorization.substring('Bearer '.length);
+  if (req.headers.authorization) {
+    const token = req.headers.authorization.substring('Bearer '.length);
 
-  if (token) {
-    try {
-      const { id, deviceId = null } = await jwt.verify(token, process.env.SECRET);
-      const user = await models.User.findOne({
-        where: {
-          id
-        },
-        raw: true,
-      });
-      return {
-        ...user,
-        deviceId
-      };
-    } catch (e) {
-      throw new AuthenticationError(
-        'Your session expired. Sign in again.',
-      );
+    if (token) {
+      try {
+        const {id, deviceId = null} = await jwt.verify(token, process.env.SECRET);
+        const user = await models.User.findOne({
+          include: [
+            ...userActiveSiteIncludes({ models }),
+          ],
+          where: {
+            id
+          },
+        });
+        return {
+          ...user.get({ plain: true }),
+          deviceId
+        };
+      } catch (e) {
+        throw new AuthenticationError(
+          'Your session expired. Sign in again.',
+        );
+      }
     }
   }
 };
@@ -104,7 +109,7 @@ const apolloServer = new ApolloServer({
 apolloServer.applyMiddleware({ app, path: '/graphql' });
 
 const httpServer = http.createServer(app);
-apolloServer.installSubscriptionHandlers(httpServer);
+// apolloServer.installSubscriptionHandlers(httpServer);
 
 const isTest = !!process.env.TEST_DATABASE;
 const isProduction = !!process.env.DATABASE_URL;

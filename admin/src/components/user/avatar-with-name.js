@@ -7,6 +7,7 @@ const UserAvatar = ({
   email,
   name
 }) => {
+  console.log('NAME', name);
   return email ? (
     <div className="user-avatar-with-name">
       <Avatar email={email} />

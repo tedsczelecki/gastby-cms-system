@@ -13,14 +13,10 @@ const Textarea = ({
 }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-  console.log('CONTENT STATE', ContentState.createFromText(value || ''));
-  console.log('EDITOR', editorState);
   const handleChange = (newEditorState) => {
-    console.log(newEditorState);
     const rawContentState = convertToRaw(newEditorState.getCurrentContent());
     const markup = draftToHtml(rawContentState);
     onChange(markup);
-    console.log(markup);
     setEditorState(newEditorState);
   }
 
@@ -31,7 +27,7 @@ const Textarea = ({
       blocksFromHTML.entityMap,
     );
     setEditorState(EditorState.createWithContent(state));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="rp-textarea">

@@ -2,7 +2,7 @@
   "development": {
     "username": "rebel",
     "password": "rebel",
-    "database": "boilerplate",
+    "database": "gatsbycms",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
